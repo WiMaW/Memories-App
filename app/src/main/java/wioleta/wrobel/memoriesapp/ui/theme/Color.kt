@@ -16,4 +16,4 @@ val card_color_grey = Color(0xFFd5e0e6)
 val font_color_grey = Color(0xFF898AA6)
 val font_color_blue = Color(0xFF6886C5)
 val font_color_green = Color(0xFF5AA469)
-
+val font_color_pink = Color(0xFFED5AB3)

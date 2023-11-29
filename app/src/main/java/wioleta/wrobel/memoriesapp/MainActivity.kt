@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -48,18 +49,10 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainScreen() {
         val context: Context = LocalContext.current
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            //to do - landscape changing image!!!
-            Image(
-                painter = painterResource(id = R.drawable.background_image),
-                contentDescription = "background_image",
-                contentScale = ContentScale.Fit,
+            Column (horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()
-            )
-            Column (horizontalAlignment = Alignment.CenterHorizontally) {
+                ) {
                 Text(
                     text = stringResource(id = R.string.add_first_memory),
                     color = MaterialTheme.colorScheme.primary
@@ -82,15 +75,14 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
 
-    @Preview(showBackground = true)
-    @Composable
-    fun GreetingPreview() {
-        MemoriesAppTheme {
-            MainScreen()
-        }
-    }
+//    @Preview(showBackground = true)
+//    @Composable
+//    fun GreetingPreview() {
+//        MemoriesAppTheme {
+//            MainScreen()
+//        }
+//    }
 }
 
 

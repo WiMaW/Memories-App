@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">MemoriesApp</string>
 
-    <string name="add_first_memory">Dodaj swoje pierwsze wspomnienie</string>
+    <string name="add_first_memory">Dodaj wspomnienie</string>
     <string name="memories_list">Twoje Wspomnienia</string>
 
     <string name="month_1">Styczeń</string>
@@ -20,6 +20,7 @@
 
     <string name="add_memory">Dodaj wspomnienie</string>
     <string name="memory_date">data</string>
+    <string name="memory_add_date">dodaj</string>
     <string name="memory_title">tytuł</string>
     <string name="memory_description">opis</string>
     <string name="add_image">zdjęcie</string>

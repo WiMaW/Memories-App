@@ -33,12 +33,13 @@ private val LightColorScheme = lightColorScheme(
 )
 
 val font_main_galada = FontFamily(Font(R.font.galada_regular))
-val font_main_lobster_bold = FontFamily(Font(R.font.lobster_two_bold))
-val font_main_lilita = FontFamily(Font(R.font.lilita_one_regular))
+
 val font_oleo_regular = FontFamily(Font(R.font.oleoscript_regular))
 val font_oleo_bold = FontFamily(Font(R.font.oleoscript_bold))
 val font_yeseva_one = FontFamily(Font(R.font.yeseva_one_regular))
 val font_berkshire_swash = FontFamily(Font(R.font.berkshire_swash_regular))
+val font_playball = FontFamily(Font(R.font.playball_regular))
+val font_lobster = FontFamily(Font(R.font.lobster_regular))
 
 @Composable
 fun MemoriesAppTheme(

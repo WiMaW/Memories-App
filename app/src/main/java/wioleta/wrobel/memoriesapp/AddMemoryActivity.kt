@@ -3,11 +3,14 @@ package wioleta.wrobel.memoriesapp
 import android.content.Intent
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,12 +24,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -36,6 +42,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,13 +54,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.android.material.datepicker.MaterialDatePicker
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeler.sheets.calendar.CalendarDialog
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import wioleta.wrobel.memoriesapp.model.MemoryCardColors
 import wioleta.wrobel.memoriesapp.model.MemoryFontColor
 import wioleta.wrobel.memoriesapp.model.MemoryFontFamily
 import wioleta.wrobel.memoriesapp.ui.theme.MemoriesAppTheme
-import wioleta.wrobel.memoriesapp.ui.theme.font_oleo_regular
-import java.time.format.TextStyle
+import java.text.DateFormat
+import java.time.LocalDate
+
 
 class AddMemoryActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,19 +83,18 @@ class AddMemoryActivity : ComponentActivity() {
     fun AddMemoryScreen() {
         val context = LocalContext.current
 
-        var memoryDate by remember  {mutableStateOf("")}
-        var memoryTitle by remember { mutableStateOf("") }
-        var memoryDescription by remember { mutableStateOf("") }
+        var memoryDate: LocalDate by rememberSaveable { mutableStateOf(LocalDate.now()) }
+        var memoryTitle by rememberSaveable { mutableStateOf("") }
+        var memoryDescription by rememberSaveable { mutableStateOf("") }
         var memoryImage: Image
 
         val cardColors = MemoryCardColors.values()
         val fontColors = MemoryFontColor.values()
         val fontsFamily = MemoryFontFamily.values()
 
-
-        var currentCardColor by remember { mutableStateOf(cardColors.first()) }
-        var currentFontColor by remember { mutableStateOf(fontColors.first()) }
-        var currentFontFamily by remember { mutableStateOf(fontsFamily.first()) }
+        var currentCardColor by rememberSaveable { mutableStateOf(cardColors.first()) }
+        var currentFontColor by rememberSaveable { mutableStateOf(fontColors.first()) }
+        var currentFontFamily by rememberSaveable { mutableStateOf(fontsFamily.first()) }
 
         val textStyle: androidx.compose.ui.text.TextStyle = androidx.compose.ui.text.TextStyle(
             fontWeight = FontWeight.Normal,
@@ -93,6 +104,19 @@ class AddMemoryActivity : ComponentActivity() {
         )
 
         val scrollState = rememberScrollState()
+
+        val calendarState = rememberSheetState()
+
+        CalendarDialog(
+            state = calendarState,
+            config = CalendarConfig(
+                monthSelection = true,
+                yearSelection = true,
+                style = CalendarStyle.MONTH,
+                ),
+            selection = CalendarSelection.Date {
+                date -> memoryDate = date
+        })
 
         Card (
             colors = CardDefaults.cardColors(currentCardColor.color),
@@ -114,21 +138,40 @@ class AddMemoryActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.primary
                 )
                 //Date type how to do it??
-                OutlinedTextField(
-                    value = memoryDate,
-                    onValueChange = {memoryDate = it},
-                    label = { Text(
-                        text = stringResource(id = R.string.memory_date),
-                        style = MaterialTheme.typography.labelMedium,
-                    )},
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    singleLine = true,
-                    colors = TextFieldDefaults.outlinedTextFieldColors(unfocusedBorderColor = MaterialTheme.colorScheme.primary,textColor = Color.Gray),
-                    textStyle = textStyle,
-                    modifier = Modifier
-                        .height(66.dp)
-                        .fillMaxWidth(),
-                )
+                Row (verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ){
+                    OutlinedTextField(
+                        value = memoryDate.toString(),
+                        onValueChange = {},
+                        enabled = false,
+                        label = { Text(
+                            text = stringResource(id = R.string.memory_date),
+                            style = MaterialTheme.typography.labelMedium,
+                        )},
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        singleLine = true,
+                        colors = TextFieldDefaults.outlinedTextFieldColors(disabledBorderColor = MaterialTheme.colorScheme.primary,textColor = Color.Gray),
+                        textStyle = textStyle,
+                        modifier = Modifier
+                            .height(66.dp)
+                            .width(140.dp)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    ElevatedButton(
+                        onClick = { calendarState.show() },
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+                        shape = MaterialTheme.shapes.large,
+                        modifier = Modifier.size(30.dp),
+                        contentPadding = PaddingValues(1.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Add,
+                            contentDescription = "add_icon",
+                            tint = Color.White
+                            )
+                    }
+                }
                 Spacer(modifier = Modifier.height(5.dp))
                 OutlinedTextField(
                     value = memoryTitle,
@@ -193,7 +236,7 @@ class AddMemoryActivity : ComponentActivity() {
                     }
                 }
                 Spacer(modifier = Modifier.height(6.dp))
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(17.dp)) {
                     items(items = fontColors) {fontColor ->
                         ElevatedButton(
                             onClick = { currentFontColor = fontColor},
@@ -211,7 +254,7 @@ class AddMemoryActivity : ComponentActivity() {
                     }
                 }
                 Spacer(modifier = Modifier.height(6.dp))
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(items = fontsFamily) {fontFamily ->
                         ElevatedButton(
                             onClick = { currentFontFamily = fontFamily},
@@ -239,7 +282,7 @@ class AddMemoryActivity : ComponentActivity() {
                         },
                         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                         shape = MaterialTheme.shapes.large,
-                        modifier = Modifier.width(110.dp)
+                        modifier = Modifier.width(125.dp)
                     ) {
                         Text(
                             text = stringResource(id = R.string.cancel_button),
@@ -254,7 +297,7 @@ class AddMemoryActivity : ComponentActivity() {
                             startActivity(intent) },
                         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                         shape = MaterialTheme.shapes.large,
-                        modifier = Modifier.width(110.dp)
+                        modifier = Modifier.width(125.dp)
                     ) {
                         Text(
                             text = stringResource(id = R.string.save_button),
@@ -267,14 +310,20 @@ class AddMemoryActivity : ComponentActivity() {
         }
     }
 
-
-    @Preview(showBackground = true)
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun GreetingPreview2() {
-        MemoriesAppTheme {
-            AddMemoryScreen()
-        }
+    fun DatePicker() {
+
     }
+
+
+//    @Preview(showBackground = true)
+//    @Composable
+//    fun GreetingPreview2() {
+//        MemoriesAppTheme {
+//            AddMemoryScreen()
+//        }
+//    }
 }
 
 

@@ -1,6 +1,5 @@
 package wioleta.wrobel.memoriesapp.ui.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -18,21 +17,14 @@ val Typography = Typography(
     ),
     labelMedium = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        fontFamily = font_oleo_regular,
+        fontSize = 20.sp,
+        fontFamily = font_lobster,
         color = primary_color_light
     ),
     labelSmall = TextStyle(
-        fontFamily = font_oleo_bold,
+        fontFamily = font_lobster,
         fontWeight = FontWeight.Normal,
-        fontSize = 19.sp
+        fontSize = 14.sp
     ),
 
 )
-
-enum class MemoryFontFamily (val font: FontFamily) {
-    OLEO(font_oleo_regular),
-    YESEVA(font_yeseva_one),
-    BERKSHIRE(font_berkshire_swash),
-    LILITA(font_main_lilita)
-}

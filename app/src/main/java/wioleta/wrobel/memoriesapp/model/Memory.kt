@@ -12,8 +12,10 @@ import wioleta.wrobel.memoriesapp.ui.theme.font_berkshire_swash
 import wioleta.wrobel.memoriesapp.ui.theme.font_color_blue
 import wioleta.wrobel.memoriesapp.ui.theme.font_color_green
 import wioleta.wrobel.memoriesapp.ui.theme.font_color_grey
-import wioleta.wrobel.memoriesapp.ui.theme.font_main_lilita
+import wioleta.wrobel.memoriesapp.ui.theme.font_color_pink
+import wioleta.wrobel.memoriesapp.ui.theme.font_lobster
 import wioleta.wrobel.memoriesapp.ui.theme.font_oleo_regular
+import wioleta.wrobel.memoriesapp.ui.theme.font_playball
 import wioleta.wrobel.memoriesapp.ui.theme.font_yeseva_one
 import wioleta.wrobel.memoriesapp.ui.theme.primary_color_light
 import java.io.DataInput
@@ -37,15 +39,15 @@ enum class MemoryCardColors(val color: Color) {
 }
 
 enum class MemoryFontColor(val color: Color) {
-    PURPULE(primary_color_light),
     GREY(font_color_grey),
+    PINK(font_color_pink),
     GREEN(font_color_green),
     BLUE(font_color_blue)
 }
 
 enum class MemoryFontFamily (val font: FontFamily) {
-    OLEO(font_oleo_regular),
+    LOBSTER(font_lobster),
     YESEVA(font_yeseva_one),
     BERKSHIRE(font_berkshire_swash),
-    LILITA(font_main_lilita)
+    PLAYBALL(font_playball)
 }

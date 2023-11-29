@@ -19,6 +19,7 @@
 
     <string name="add_memory">Add memory</string>
     <string name="memory_date">date</string>
+    <string name="memory_add_date">add</string>
     <string name="memory_title">title</string>
     <string name="memory_description">description</string>
     <string name="add_image">image</string>
