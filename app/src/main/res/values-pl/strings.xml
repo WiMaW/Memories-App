@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MemoriesApp</string>
+
+    <string name="add_first_memory">Dodaj swoje pierwsze wspomnienie</string>
+    <string name="memories_list">Twoje Wspomnienia</string>
+
+    <string name="month_1">Styczeń</string>
+    <string name="month_2">Luty</string>
+    <string name="month_3">Marzec</string>
+    <string name="month_4">Kwiecień</string>
+    <string name="month_5">Maj</string>
+    <string name="month_6">Czerwiec</string>
+    <string name="month_7">Lipiec</string>
+    <string name="month_8">Sierpień</string>
+    <string name="month_9">Wrzesień</string>
+    <string name="month_10">Październik</string>
+    <string name="month_11">Listopad</string>
+    <string name="month_12">Grudizeń</string>
+
+    <string name="add_memory">Dodaj wspomnienie</string>
+    <string name="memory_date">data</string>
+    <string name="memory_title">tytuł</string>
+    <string name="memory_description">opis</string>
+    <string name="add_image">zdjęcie</string>
+    <string name="save_button">Zachowaj</string>
+    <string name="cancel_button">Anuluj</string>
+
+    <string name="title_activity_add_memory">AddMemoryActivity</string>
+    <string name="delete_button">Skasuj</string>
+    <string name="edit_button">Edytuj</string>
+    <string name="share_button">Prześlij</string>
+    <string name="print_button">Drukuj</string>
+
+</resources>
