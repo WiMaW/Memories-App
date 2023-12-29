@@ -1,8 +1,8 @@
 package wioleta.wrobel.memoriesapp.model
 
-import android.media.Image
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import com.squareup.moshi.JsonClass
 import wioleta.wrobel.memoriesapp.ui.theme.card_color_blue
 import wioleta.wrobel.memoriesapp.ui.theme.card_color_green
 import wioleta.wrobel.memoriesapp.ui.theme.card_color_grey
@@ -14,21 +14,20 @@ import wioleta.wrobel.memoriesapp.ui.theme.font_color_green
 import wioleta.wrobel.memoriesapp.ui.theme.font_color_grey
 import wioleta.wrobel.memoriesapp.ui.theme.font_color_pink
 import wioleta.wrobel.memoriesapp.ui.theme.font_lobster
-import wioleta.wrobel.memoriesapp.ui.theme.font_oleo_regular
 import wioleta.wrobel.memoriesapp.ui.theme.font_playball
 import wioleta.wrobel.memoriesapp.ui.theme.font_yeseva_one
-import wioleta.wrobel.memoriesapp.ui.theme.primary_color_light
-import java.io.DataInput
+import java.io.Serializable
 
+@JsonClass(generateAdapter = true)
 data class Memory(
-    val memoryDate: DataInput,
+    val memoryDate: String,
     val memoryTitle: String,
     val memoryDescription: String,
-    val memoryImage: Image,
+    val memoryImage: String,
     val cardColorType: MemoryCardColors,
     val fontColorType: MemoryFontColor,
-    
-)
+    val fontType: MemoryFontFamily
+) : Serializable
 
 enum class MemoryCardColors(val color: Color) {
     GREEN(card_color_green),
@@ -45,7 +44,7 @@ enum class MemoryFontColor(val color: Color) {
     BLUE(font_color_blue)
 }
 
-enum class MemoryFontFamily (val font: FontFamily) {
+enum class MemoryFontFamily(val font: FontFamily) {
     LOBSTER(font_lobster),
     YESEVA(font_yeseva_one),
     BERKSHIRE(font_berkshire_swash),

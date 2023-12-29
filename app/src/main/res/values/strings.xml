@@ -22,7 +22,7 @@
     <string name="memory_add_date">add</string>
     <string name="memory_title">title</string>
     <string name="memory_description">description</string>
-    <string name="add_image">image</string>
+    <string name="add_image">add image</string>
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
 
@@ -33,6 +33,7 @@
     <string name="share_button">Share</string>
     <string name="print_button">Print</string>
     <string name="title_activity_add_memory">AddMemoryActivity</string>
+    <string name="title_activity_display_memories">DisplayMemoriesActivity</string>
 
 
 </resources>
