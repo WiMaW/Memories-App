@@ -323,12 +323,12 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun LoadImageFromURi(imageToDisplay: Uri?) {
-        if (imageToDisplay != null) {
-            contentResolver.takePersistableUriPermission(
-                imageToDisplay,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
-        }
+//        if (imageToDisplay != null) {
+//            contentResolver.takePersistableUriPermission(
+//                imageToDisplay,
+//                Intent.FLAG_GRANT_READ_URI_PERMISSION
+//            )
+//        }
         AsyncImage(
             model = imageToDisplay,
             contentDescription = "added photo",

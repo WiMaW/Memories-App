@@ -122,7 +122,7 @@ class AddMemoryActivity : ComponentActivity() {
         val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.PickVisualMedia(),
             onResult = { uri ->
-                val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                val flag = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 if (uri != null) {
                     context.contentResolver.takePersistableUriPermission(uri, flag)
                     selectedImage = uri
